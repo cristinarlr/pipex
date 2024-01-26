@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/01/26 08:51:24 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:10:53 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <limits.h>
 # include <sys/time.h>
 # include <errno.h>
+# include <fcntl.h>
 
 /* ---------------- PATH ---------------- */
 # include "../src/libft/libft.h"
