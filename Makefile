@@ -29,7 +29,6 @@ SRC_GNL_CFILES = 	get_next_line.c \
 # Source/linker files ---------------------------------------- #
 LIBFT_DIR =$(SRC_DIR)/libft
 PRINTF_DIR =$(SRC_DIR)/ft_printf
-MLX_DIR = mlx
 
 # Object files ----------------------------------------------- #
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
@@ -43,8 +42,8 @@ INCL_DIR = includes
 # Compiler options ------------------------------------------- #
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror  $(SANITIZE)
-LINKFLAGS = -L./$(LIBFT_DIR) -lft -L./$(PRINTF_DIR) -lftprintf -L./$(MLX_DIR) -lmlx
-FRAMEWORKS = -framework OpenGL -framework AppKit
+LINKFLAGS = -L./$(LIBFT_DIR) -lft -L./$(PRINTF_DIR) -lftprintf
+#FRAMEWORKS = -framework OpenGL -framework AppKit
 
 #SANITIZE=
 SANITIZE=-g -fsanitize=address
@@ -57,7 +56,6 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(PRINTF_DIR)
-	@$(MAKE) -C $(MLX_DIR)
 	@$(CC) $(CFLAGS) $(LINKFLAGS) $(FRAMEWORKS) -o $(NAME) $(OBJS)
 	@echo "$(GREEN)[+] $(NAME) COMPILED $(END)"
 
@@ -77,7 +75,6 @@ clean:
 fclean: clean
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 	@$(MAKE) fclean -C $(PRINTF_DIR)
-	@$(MAKE) fclean -C $(MLX_DIR)
 	@rm -f $(NAME)
 	@echo "$(MAGENTA)[+] $(NAME) ERASED $(END)"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/01/25 12:56:52 by crramire         ###   ########.fr       */
+/*   Updated: 2024/01/26 08:51:24 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <limits.h>
 # include <sys/time.h>
 # include <errno.h>
+
+/* ---------------- PATH ---------------- */
+# include "../src/libft/libft.h"
+# include "../src/ft_printf/ft_printf.h"
 
 /* ----- MESSAGES ----- */
 
