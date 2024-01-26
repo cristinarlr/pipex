@@ -71,13 +71,13 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(BONUS_OBJECTS)
 	@ar rc $(NAME) $(OBJS)
-	@echo "$(GREEN)[+] $(BLUE) $(NAME) compilada! $(END)"
+	@echo "$(GREEN)[+] $(BLUE) $(NAME) COMPILED! $(END)"
 	@ar r $(NAME) $(BONUS_OBJECTS)
-	@echo "$(GREEN)[+] $(BLUE) $(NAME) BONUS compilados!$(END)"
+	@echo "$(GREEN)[+] $(BLUE) $(NAME) COMPILED BONUS!$(END)"
 
 #bonus: $(BONUS_OBJECTS)
 #	@ar r $(NAME) $(BONUS_OBJECTS)
-#s	@echo "$(BLUE)[+] $(NAME) BONUS compilados!$(END)"
+#	@echo "$(BLUE)[+] $(NAME) BONUS compilados!$(END)"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
@@ -90,11 +90,11 @@ clean:
 	@rm -f $(OBJS)
 	@rm -f $(BONUS_OBJECTS)
 	@rm -rf $(OBJ_DIR)
-	@echo "$(MAGENTA)[+] $(BLUE)  Archivos objeto .o $(NAME) borrados $(END)"
+	@echo "$(MAGENTA)[+] $(BLUE)  Object .o files $(NAME) ERASED $(END)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(MAGENTA)[+] $(BLUE) $(NAME) borrado $(END)"
+	@echo "$(MAGENTA)[+] $(BLUE) $(NAME) ERASED $(END)"
 
 re: fclean all
 
