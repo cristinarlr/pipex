@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/01/30 13:41:14 by crramire         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:04:45 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ typedef struct s_pipex
 	int		argc;
 	char	**argv;
 	char	**envp;
-	char	*env_path;
+	char	*cmds[2];
 	int		fd_infile;
 	int		fd_outfile;
-	char	*cmds[2];
-	char	**cmd_args_splitted;
 	int		fd_pipe[2];
+	char	*envp_path;
+	char	**cmd_args_splitted;
 	pid_t	pid[2];
 }	t_pipex;
 

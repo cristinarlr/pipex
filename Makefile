@@ -19,6 +19,9 @@ SRCS = $(SRC_FILES) $(SRC_GNL_FILES)
 SRC_DIR = src
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRC_CFILES))
 SRC_CFILES =	main.c \
+				path.c \
+				commands.c \
+				error_manage.c \
 
 
 SRC_GNL_DIR = $(SRC_DIR)/gnl
