@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/01/31 11:01:56 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:37:41 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	init_data_structure(t_pipex *data)
 		// ft de close 4 files and exit
 		return (ERROR);
 	}
-	data->envp_path = NULL;
+	data->envp_path_splitted = NULL;
 	data->cmd_args_splitted = NULL;
 	return (NO_ERROR);
 
@@ -71,7 +71,10 @@ int	main(int argc, char **argv, char **envp)
 	data.cmds[0] = *(argv + 2);
 	data.cmds[1] = *(argv + 3);
 	init_data_structure(&data);
-	//find_path_in_envp(&data);
+	if (find_path_in_envp(&data) == 0)
+		exit(ft_printf("crear función exit_program, no path finded"));
+	ft_printf("MAIN CHECK=%s", data.envp_path);
+	//ft_printf("CHECKING:%s\n", data.envp_path);
 	pipex(&data);
 	return (0);
 }
