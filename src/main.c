@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/01 12:37:41 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:34:13 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int argc, char **argv, char **envp)
 	init_data_structure(&data);
 	if (find_path_in_envp(&data) == 0)
 		exit(ft_printf("crear función exit_program, no path finded"));
+	get_cmd_path_routes(&data, argv[2]);
 	ft_printf("MAIN CHECK=%s", data.envp_path);
 	//ft_printf("CHECKING:%s\n", data.envp_path);
 	pipex(&data);

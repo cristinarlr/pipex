@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/01 12:00:19 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:33:47 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ typedef struct s_pipex
 /* ----- FUNCTIONS ----- */
 
 char	*find_path_in_envp(t_pipex *data);
+char	*get_cmd_path_routes(t_pipex *data, char *cmd);
 
 #endif
