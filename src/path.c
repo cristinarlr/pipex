@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 10:12:56 by Cristina          #+#    #+#             */
-/*   Updated: 2024/02/01 13:37:16 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:59:00 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*find_path_in_envp(t_pipex *data)
 	{
 		if (ft_strnstr(data->envp[i], "PATH=", 5) != 0)
 		{
-			data->envp_path = ft_strnstr(data->envp[i], "PATH=", 5);
+			data->envp_path = ft_strnstr(data->envp[i], "PATH=", 5) + 5;
 			return (data->envp_path);
 		}
 		i++;
@@ -32,7 +32,7 @@ char	*find_path_in_envp(t_pipex *data)
 }
 
 //check if cmd passed is a route
-static int	check_command(t_pipex *data, char *cmd)
+static int	check_command_type(t_pipex *data, char *cmd)
 {
 	if (ft_strlen(data->argv[2]) == 0 | ft_strlen(data->argv[3]) == 0)
 		exit(ft_printf("crear función exit_program - invalid arguments"));
@@ -46,21 +46,24 @@ static int	check_command(t_pipex *data, char *cmd)
 	return (0);
 }
 
-char	*get_cmd_path_routes(t_pipex *data, char *cmd)
+char	*get_cmd_path_route(t_pipex *data, char *cmd_route)
 {
 	int		i;
-	//char	*cmd_route;
+	char	*add_slash;
 
 	i = 0;
-	if (check_command(data, cmd) == 1)
-		return (cmd);
+	if (check_command_type(data, cmd_route) == 1)
+		return (cmd_route);
 	else
 	{
 		data->envp_path_splitted = ft_split(data->envp_path, ':');
 		while (data->envp_path_splitted[i])
 		{
-			ft_printf("%s\n", data->envp_path_splitted[i]);
+			add_slash = ft_strjoin(data->envp_path_splitted[i], "/");
+			cmd_route = ft_strjoin(add_slash, cmd_route);
+			//ft_printf("cmd_route (%i) = %s\n", i, cmd_route);
 			i++;
 		}
 	}
+	return (cmd_route);
 }

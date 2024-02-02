@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/01 13:33:47 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:04:48 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ typedef struct s_pipex
 	char	*envp_path;
 	char	**envp_path_splitted;
 	char	**cmd_args_splitted;
-	pid_t	pid1;
-	pid_t	pid2;
+	pid_t	pid[0];
 }	t_pipex;
 
 /* ----- STRUCT ----- */
@@ -64,6 +63,6 @@ typedef struct s_pipex
 /* ----- FUNCTIONS ----- */
 
 char	*find_path_in_envp(t_pipex *data);
-char	*get_cmd_path_routes(t_pipex *data, char *cmd);
+char	*get_cmd_path_route(t_pipex *data, char *cmd);
 
 #endif
