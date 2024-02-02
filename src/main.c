@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/02 13:22:41 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:35:32 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int	init_data_structure(t_pipex *data)
 	}
 	data->envp_path_splitted = NULL;
 	data->cmd_args_splitted = NULL;
+	data->pid[0] = -1;
+	data->pid[0] = -1;
+	data->fd_pipe[0] = -1;
+	data->fd_pipe[1] = -1;
 	return (NO_ERROR);
 
 }

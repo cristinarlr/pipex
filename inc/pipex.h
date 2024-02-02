@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/02 13:04:48 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:14:39 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ enum e_fd_events{
 	WRITE
 };
 
+enum e_child_process{
+	CHILD_1 = 0,
+	CHILD_2
+};
+
 enum e_exit_code{
 	ERROR = 0,
 	NO_ERROR = 1
@@ -55,7 +60,7 @@ typedef struct s_pipex
 	char	*envp_path;
 	char	**envp_path_splitted;
 	char	**cmd_args_splitted;
-	pid_t	pid[0];
+	pid_t	pid[2];
 }	t_pipex;
 
 /* ----- STRUCT ----- */
@@ -64,5 +69,6 @@ typedef struct s_pipex
 
 char	*find_path_in_envp(t_pipex *data);
 char	*get_cmd_path_route(t_pipex *data, char *cmd);
+int	pipex(t_pipex *data);
 
 #endif
