@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 10:12:56 by Cristina          #+#    #+#             */
-/*   Updated: 2024/02/02 12:59:00 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:52:56 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*find_path_in_envp(t_pipex *data)
 {
 	int	i;
 
+	ft_printf("Dentro de find_path_in_envp\n");
 	i = 0;
 	while (data->envp[i])
 	{
@@ -34,6 +35,7 @@ char	*find_path_in_envp(t_pipex *data)
 //check if cmd passed is a route
 static int	check_command_type(t_pipex *data, char *cmd)
 {
+	ft_printf("Dentro de check_command_type\n");
 	if (ft_strlen(data->argv[2]) == 0 | ft_strlen(data->argv[3]) == 0)
 		exit(ft_printf("crear función exit_program - invalid arguments"));
 	if (cmd[0] == '.' | cmd[0] == '/')
@@ -46,24 +48,39 @@ static int	check_command_type(t_pipex *data, char *cmd)
 	return (0);
 }
 
-char	*get_cmd_path_route(t_pipex *data, char *cmd_route)
+
+//get command in route format "/../../cmd"
+//? cmd_path should be freed after future use?
+char	*get_cmd_path_route(t_pipex *data, char *cmd)
 {
 	int		i;
 	char	*add_slash;
+	char	*cmd_path;
 
+	ft_printf("Dentro de get_cmd_path_route\n");
 	i = 0;
-	if (check_command_type(data, cmd_route) == 1)
-		return (cmd_route);
+	if (check_command_type(data, cmd) == 1)
+		return (cmd);
 	else
 	{
 		data->envp_path_splitted = ft_split(data->envp_path, ':');
 		while (data->envp_path_splitted[i])
 		{
 			add_slash = ft_strjoin(data->envp_path_splitted[i], "/");
-			cmd_route = ft_strjoin(add_slash, cmd_route);
-			//ft_printf("cmd_route (%i) = %s\n", i, cmd_route);
+			if (!add_slash)
+				return (NULL);
+			ft_printf("\nDESPUES DE STRJOIN ADD_SLASH = %s\n", add_slash);
+			cmd_path = ft_strjoin(add_slash, cmd);
+			ft_printf("DESPUES DE STRJOIN CMD_PATH= %s\n\n", cmd_path);
+			free(add_slash);
+			if (access(cmd_path, F_OK) == 0)
+			{
+				ft_printf("ACCESS CMD SUCCESS = %s\n", cmd_path);
+				return (cmd_path);
+			}
 			i++;
 		}
+		ft_printf("FUERA DE WHILE  %s\n", cmd_path);
 	}
-	return (cmd_route);
+	return (cmd_path);
 }
