@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/02 15:14:39 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:51:56 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ enum e_fd_events{
 };
 
 enum e_child_process{
-	CHILD_1 = 0,
-	CHILD_2
+	CHILD = 0,
 };
 
 enum e_exit_code{
@@ -69,6 +68,7 @@ typedef struct s_pipex
 
 char	*find_path_in_envp(t_pipex *data);
 char	*get_cmd_path_route(t_pipex *data, char *cmd);
-int	pipex(t_pipex *data);
+int		pipex(t_pipex *data);
+void	ft_print_pids(pid_t pid);
 
 #endif
