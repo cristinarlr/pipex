@@ -23,7 +23,7 @@ SRC_CFILES =	main.c \
 				commands.c \
 				error_manage.c \
 				pipex.c \
-				utils.c \
+				printing_utils.c \
 
 SRC_GNL_DIR = $(SRC_DIR)/gnl
 SRC_GNL_FILES = $(addprefix $(SRC_GNL_DIR)/, $(SRC_GNL_CFILES))
