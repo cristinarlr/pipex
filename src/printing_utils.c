@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:45:55 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/05 11:01:03 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:43:55 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,15 @@ void	ft_print_pids(pid_t pid)
 		ft_printf("Daddy PID = %i\n", pid);
 	ft_printf("************************\n");
 	return ;
+}
+
+void	ft_print_array(char **arr)
+{
+	int	i;
+	
+	i = 0;
+	while (arr[i])
+	{
+		ft_printf("arr[%i] = %s\n", i, arr[i]);
+	}
 }
