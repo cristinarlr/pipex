@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/05 11:51:56 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:37:49 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ char	*find_path_in_envp(t_pipex *data);
 char	*get_cmd_path_route(t_pipex *data, char *cmd);
 int		pipex(t_pipex *data);
 void	ft_print_pids(pid_t pid);
+void	exec_cmd_1(t_pipex *data);
+void	exec_cmd_2(t_pipex *data);
 
 #endif

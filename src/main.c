@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/05 12:21:25 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:40:26 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	main(int argc, char **argv, char **envp)
 		exit(ft_printf("crear función exit_program, problem with structure"));
 	if (find_path_in_envp(&data) == 0)
 		exit(ft_printf("crear función exit_program, no path finded"));
-	//get_cmd_path_route(&data, argv[2]);
 	pipex(&data);
 	return (0);
 }
