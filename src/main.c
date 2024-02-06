@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/06 12:40:26 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:48:11 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	init_data_structure(t_pipex *data)
 {
-	ft_printf("Dentro de init_data_structure\n");
+	//ft_printf("Dentro de init_data_structure\n");
 	data->fd_infile = open(data->argv[1], O_RDONLY);
 	data->fd_outfile = open(data->argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (data->fd_infile < 0 || data->fd_outfile < 0)
@@ -41,7 +41,7 @@ int	init_data_structure(t_pipex *data)
 
 static void	check_program_args(int argc, char **argv, char **envp)
 {
-	ft_printf("Dentro de check_program_args\n");
+	//ft_printf("Dentro de check_program_args\n");
 	if (!envp)
 		exit(ft_printf("crear función exit_program - 1"));
 	//exit(write(1, "Error: envp", 11));
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	data;
 
-	ft_printf("%s PID: %i\n", argv[0], getpid());
+	//ft_printf("%s PID: %i\n", argv[0], getpid());
 	check_program_args(argc, argv, envp);
 	data.argc = argc;
 	data.argv = argv;
