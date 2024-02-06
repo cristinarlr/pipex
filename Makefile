@@ -20,7 +20,7 @@ SRC_DIR = src
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRC_CFILES))
 SRC_CFILES =	main.c \
 				path.c \
-				commands.c \
+				execute.c \
 				error_manage.c \
 				pipex.c \
 				printing_utils.c \
