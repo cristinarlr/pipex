@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/06 13:44:09 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:01:55 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ enum e_exit_code{
 	NO_ERROR = 1
 };
 
+typedef enum s_error {
+	ENV = 0,
+	FILE,
+	NO_CMD,
+	CMD,
+	MALLOC
+} t_error;
+
 typedef struct s_pipex
 {
 	int		argc;
@@ -73,5 +81,6 @@ void	ft_print_pids(pid_t pid);
 void	ft_print_array(char **arr);
 void	exec_cmd_1(t_pipex *data);
 void	exec_cmd_2(t_pipex *data);
+void	exit_program(t_error code, int fd, t_pipex *data);
 
 #endif

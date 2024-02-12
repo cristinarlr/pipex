@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/12 09:43:47 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:01:31 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ int	init_data_structure(t_pipex *data)
 	//ft_printf("Dentro de init_data_structure\n");
 	data->fd_infile = open(data->argv[1], O_RDONLY);
 	data->fd_outfile = open(data->argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (data->fd_infile < 0 || data->fd_outfile < 0)
-	{
-		// ft de close 2 files and exit
-		return (ERROR);
-	}
+	if (data->fd_infile < 0)
+		exit_program(FILE, data->fd_infile, NULL);
+	if (data->fd_outfile < 0)
+		exit_program(FILE, data->fd_outfile, NULL);
 	if (pipe(data->fd_pipe) == -1)
 	{
 		ft_printf("problem doing PIPE");
@@ -57,21 +56,30 @@ static void	check_program_args(int argc, char **argv, char **envp)
 		exit(ft_printf("crear función exit_program - 6"));
 }
 
+
+
+
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	data;
 
-	//ft_printf("%s PID: %i\n", argv[0], getpid());
+	ft_printf("%s PID: %i\n", argv[0], getpid());
+	/* Miramos si los argumentos estan bien */
+	/* Me ha dicho Luis que esto es mejor hacero dentro de child */
 	check_program_args(argc, argv, envp);
+	/* Creamos la estructura */
 	data.argc = argc;
 	data.argv = argv;
 	data.envp = envp;
 	data.cmds[0] = *(argv + 2);
 	data.cmds[1] = *(argv + 3);
 	if (init_data_structure(&data) == ERROR)
-		exit(ft_printf("crear función exit_program, problem with structure"));
+		perror("Error: Problem initializing structure");
 	if (find_path_in_envp(&data) == 0)
-		exit(ft_printf("crear función exit_program, no path finded"));
+		perror("Error: No path finded");
+	/* Llamamos a os hijos */
 	pipex(&data);
+	/* Salimos del programa */
 	return (0);
 }
