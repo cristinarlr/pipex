@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   printing_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:45:55 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/06 13:43:55 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:44:10 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/get_next_line.h"
 #include "../inc/pipex.h"
 
 void	ft_print_pids(pid_t pid)
@@ -27,7 +26,7 @@ void	ft_print_pids(pid_t pid)
 void	ft_print_array(char **arr)
 {
 	int	i;
-	
+
 	i = 0;
 	while (arr[i])
 	{

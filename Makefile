@@ -14,7 +14,7 @@ END = \033[0m
 NAME = pipex
 
 # Source files ----------------------------------------------- #
-SRCS = $(SRC_FILES) $(SRC_GNL_FILES)
+SRCS = $(SRC_FILES)
 
 SRC_DIR = src
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRC_CFILES))
@@ -25,11 +25,6 @@ SRC_CFILES =	main.c \
 				pipex.c \
 				printing_utils.c \
 
-SRC_GNL_DIR = $(SRC_DIR)/gnl
-SRC_GNL_FILES = $(addprefix $(SRC_GNL_DIR)/, $(SRC_GNL_CFILES))
-SRC_GNL_CFILES = 	get_next_line.c \
-					get_next_line_utils.c \
-
 # Source/linker files ---------------------------------------- #
 LIBFT_DIR =$(SRC_DIR)/libft
 PRINTF_DIR =$(SRC_DIR)/ft_printf
@@ -38,7 +33,6 @@ PRINTF_DIR =$(SRC_DIR)/ft_printf
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 OBJ_DIR = obj
-OBJ_GNL_DIR = $(OBJ_DIR)/gnl
 
 # Include files (header) ------------------------------------- #
 INCL_DIR = includes
@@ -63,14 +57,11 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(LINKFLAGS) $(FRAMEWORKS) -o $(NAME) $(OBJS)
 	@echo "$(GREEN)[+] $(NAME) COMPILED $(END)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(OBJ_GNL_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I./$(INCL_DIR) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-
-$(OBJ_GNL_DIR):
-	@mkdir -p $(OBJ_GNL_DIR)
 
 clean:
 	@rm -rf $(OBJ_DIR)

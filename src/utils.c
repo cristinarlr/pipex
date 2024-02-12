@@ -6,11 +6,10 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:45:55 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/02 15:52:13 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:44:14 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/get_next_line.h"
 #include "../inc/pipex.h"
 
 void	ft_print_pids(pid_t pid)

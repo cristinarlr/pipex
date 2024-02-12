@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:02:40 by Cristina          #+#    #+#             */
-/*   Updated: 2024/02/06 13:46:33 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:44:19 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/get_next_line.h"
 #include "../inc/pipex.h"
 
 void	exec_cmd_1(t_pipex *data)
 {
 	char	*path;
-	
+
 	//ft_printf("Dentro de exec_cmd_1\n");
 	data->cmd_args_splitted = ft_split(data->argv[2], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
@@ -33,7 +32,7 @@ void	exec_cmd_1(t_pipex *data)
 void	exec_cmd_2(t_pipex *data)
 {
 	char	*path;
-	
+
 	//ft_printf("Dentro de exec_cmd_2\n");
 	data->cmd_args_splitted = ft_split(data->argv[3], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
