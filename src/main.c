@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/12 13:01:31 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:03:42 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,22 @@ static void	check_program_args(int argc, char **argv, char **envp)
 {
 	//ft_printf("Dentro de check_program_args\n");
 	if (!envp)
-		exit(ft_printf("crear función exit_program - 1"));
-	//exit(write(1, "Error: envp", 11));
+		exit_program(ENV, NULL, NULL);
 	if (argc != 5)
-		exit(ft_printf("crear función exit_program - 2"));
-	//return (write(1, USAGE, 40));
-	if ((access(argv[1], F_OK) == -1))
-		exit(ft_printf("crear función exit_program - 3"));
-	if ((access(argv[1], R_OK) == -1))
-		exit(ft_printf("crear función exit_program - 4"));
-	if ((access(argv[4], F_OK) == -1))
-		exit(ft_printf("crear función exit_program - 5"));
-	if ((access(argv[4], W_OK) == -1))
-		exit(ft_printf("crear función exit_program - 6"));
+		perror("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n");
+	if ((access(argv[1], F_OK) == -1) || (access(argv[1], R_OK) == -1))
+		exit_program(FILE, NULL, NULL);
+	if ((access(argv[4], F_OK) == -1) || (access(argv[4], W_OK) == -1))
+		exit_program(FILE, NULL, NULL);
 }
-
-
-
-
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	data;
 
 	ft_printf("%s PID: %i\n", argv[0], getpid());
-	/* Miramos si los argumentos estan bien */
-	/* Me ha dicho Luis que esto es mejor hacero dentro de child */
+	/* Me ha dicho Luis que esto es mejor hacer check program args dentro de child */
 	check_program_args(argc, argv, envp);
-	/* Creamos la estructura */
 	data.argc = argc;
 	data.argv = argv;
 	data.envp = envp;
@@ -77,9 +65,10 @@ int	main(int argc, char **argv, char **envp)
 	if (init_data_structure(&data) == ERROR)
 		perror("Error: Problem initializing structure");
 	if (find_path_in_envp(&data) == 0)
-		perror("Error: No path finded");
-	/* Llamamos a os hijos */
+	{
+		perror("Error: No PATH finded");
+		exit(errno);
+	}
 	pipex(&data);
-	/* Salimos del programa */
 	return (0);
 }

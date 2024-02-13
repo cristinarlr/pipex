@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:43:34 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/12 13:01:02 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:14:59 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void close_fds(t_pipex *data)
 		close(*(data->fd_pipe));
 }
 
-void	exit_program(t_error code, int fd, t_pipex *data)
+void	exit_program(t_error code, t_pipex *data)
 {
 	if (code == ENV)
 		perror("Environment error");
@@ -46,12 +46,12 @@ void	exit_program(t_error code, int fd, t_pipex *data)
 	else if (code == NO_CMD)
 		perror("Command not found");
 	else if (code == CMD)
-		perror("Command not found");
+		perror("Problem with command");
 	else if (code == MALLOC)
 		perror("Malloc error");
 	close_fds(data);
-	if (cmd)
-		free(cmd);
+/* 	if (cmd)
+		free(cmd); */
 	if (data->envp_path_splitted)
 		free_array(data->envp_path_splitted);
 	if (data->cmd_args_splitted)
