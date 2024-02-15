@@ -41,7 +41,6 @@ INCL_DIR = includes
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror  $(SANITIZE)
 LINKFLAGS = -L./$(LIBFT_DIR) -lft -L./$(PRINTF_DIR) -lftprintf
-#FRAMEWORKS = -framework OpenGL -framework AppKit
 
 #SANITIZE=
 SANITIZE=-g -fsanitize=address
@@ -49,7 +48,6 @@ SANITIZE=-g -fsanitize=address
 ########################## RULES ###############################
 
 all: $(NAME)
-
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)

@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/13 11:14:29 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:46:28 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 /* ----- MESSAGES ----- */
 # define USAGE "Usage: ./pipex infile cmd1 cmd2 outfile\n"
 
-
 /* ----- CONSTANTS ----- */
 
 enum e_fd_events{
@@ -49,10 +48,12 @@ enum e_exit_code{
 
 typedef enum s_error {
 	ENV = 0,
-	FILE,
+	FILE_ERR,
 	NO_CMD,
 	CMD,
-	MALLOC
+	MALLOC,
+	FORK,
+	EXECVE
 } t_error;
 
 typedef struct s_pipex

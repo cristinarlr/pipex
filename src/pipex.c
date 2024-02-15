@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:48:47 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/13 10:48:50 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:49:44 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 //child 1 process
 static void	first_command(t_pipex *data)
 {
-	ft_printf("Dentro de first_command\n");
 	data->pid[0] = fork();
-	ft_print_pids(data->pid[0]);
 	if (data->pid[0] < 0)
-		exit(ft_printf("crear función exit_program, exit parent)"));
+		exit_program(FORK, data);
 	if (data->pid[0] == CHILD)
 	{
 		close(data->fd_pipe[READ]);
@@ -30,11 +28,9 @@ static void	first_command(t_pipex *data)
 //child 2 process
 static void	second_command(t_pipex *data)
 {
-	ft_printf("Dentro de second_command\n");
 	data->pid[1] = fork();
-	ft_print_pids(data->pid[1]);
 	if (data->pid[1] < 0)
-		exit(ft_printf("sec_cmd crear función exit_program, exit parent)"));
+		exit_program(CMD, data);
 	if (data->pid[1] == CHILD)
 	{
 		close(data->fd_pipe[WRITE]);
@@ -42,11 +38,12 @@ static void	second_command(t_pipex *data)
 	}
 }
 
+//Returns last comand status
+//pero no es el main, ¿tendría retornar = en el main?
 int	pipex(t_pipex *data)
 {
 	int	status;
 
- 	//ft_printf("Dentro de pipex\n");
 	status = 30032020;
 	first_command(data);
 	second_command(data);

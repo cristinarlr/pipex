@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:45:55 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/12 09:44:10 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:22:51 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ void	ft_print_array(char **arr)
 {
 	int	i;
 
+	ft_printf("Dentro de print_array\n");
 	i = 0;
 	while (arr[i])
 	{
 		ft_printf("arr[%i] = %s\n", i, arr[i]);
+		i++;
 	}
+	ft_printf("Dentro de print_array\n");
 }
