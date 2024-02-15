@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/15 12:46:28 by crramire         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:57:33 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,31 @@
 
 /* ----- CONSTANTS ----- */
 
-enum e_fd_events{
+enum e_fd_stream
+{
+	INFILE = 0,
+	OUTFILE
+};
+
+enum e_fd_events
+{
 	READ = 0,
 	WRITE
 };
 
-enum e_child_process{
+enum e_child_process
+{
 	CHILD = 0,
 };
 
-enum e_exit_code{
+enum e_exit_code
+{
 	ERROR = 0,
 	NO_ERROR = 1
 };
 
-typedef enum s_error {
+typedef enum s_error
+{
 	ENV = 0,
 	FILE_ERR,
 	NO_CMD,
@@ -54,7 +64,7 @@ typedef enum s_error {
 	MALLOC,
 	FORK,
 	EXECVE
-} t_error;
+}	t_error;
 
 typedef struct s_pipex
 {
