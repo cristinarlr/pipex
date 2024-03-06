@@ -6,12 +6,13 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:02:40 by Cristina          #+#    #+#             */
-/*   Updated: 2024/02/15 16:04:57 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/06 13:36:44 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
+/* Verify infile and outfile fd */
 static void	check_and_open_fd(t_pipex *data, int file_stream)
 {
 	if (file_stream == INFILE)
@@ -21,10 +22,7 @@ static void	check_and_open_fd(t_pipex *data, int file_stream)
 			exit_program(FILE_ERR, NULL);
 		data->fd_infile = open(data->argv[1], O_RDONLY);
 		if (data->fd_infile < 0)
-		{
-			ft_printf("*** Error en el INFILE***\n");
 			exit_program(FILE_ERR, data);
-		}
 	}
 	else if (file_stream == OUTFILE)
 	{
@@ -38,20 +36,11 @@ static void	check_and_open_fd(t_pipex *data, int file_stream)
 	}
 }
 
-
+/* child 1 process */
 void	exec_cmd_1(t_pipex *data)
 {
 	char	*path;
 
-	/* if ((access(data->argv[1], F_OK) == -1)
-		|| (access(data->argv[1], R_OK) == -1))
-		exit_program(FILE_ERR, NULL);
-	data->fd_infile = open(data->argv[1], O_RDONLY);
-	if (data->fd_infile < 0)
-	{
-		ft_printf("*** Error en el INFILE***\n");
-		exit_program(FILE_ERR, data);
-	} */
 	check_and_open_fd(data, INFILE);
 	data->cmd_args_splitted = ft_split(data->argv[2], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
@@ -65,10 +54,12 @@ void	exec_cmd_1(t_pipex *data)
 		exit_program(EXECVE, data);
 }
 
+/* child 2 process */
 void	exec_cmd_2(t_pipex *data)
 {
 	char	*path;
 
+	check_and_open_fd(data, OUTFILE);
 	data->cmd_args_splitted = ft_split(data->argv[3], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
 	if (dup2(data->fd_pipe[READ], STDIN_FILENO) == -1)
