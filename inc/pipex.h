@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/15 15:57:33 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:30:52 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ void	ft_print_array(char **arr);
 void	exec_cmd_1(t_pipex *data);
 void	exec_cmd_2(t_pipex *data);
 void	exit_program(t_error code, t_pipex *data);
+void	close_fds(t_pipex *data);
 
 #endif

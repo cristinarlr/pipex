@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/06 13:42:18 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:20:10 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	check_program_args(int argc, char **argv, char **envp)
 {
 	(void) argv;
 
-	atexit(check_leaks);
 	if (!envp)
 		exit_program(ENV, NULL);
 	if (argc != 5)
@@ -46,8 +45,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	data;
 
+	atexit(check_leaks);
 	ft_printf("%s PID: %i\n", argv[0], getpid());
-	//TODO - lpastor mejor hacer check program args dentro de child por qué, era por los open fd
 	check_program_args(argc, argv, envp);
 	data.argc = argc;
 	data.argv = argv;
@@ -67,8 +66,10 @@ int	main(int argc, char **argv, char **envp)
 	return (pipex(&data));
 }
 
-//FIXME - You have access to multiple processes named pipex:
+//NOTE - [FIXED] You have access to multiple processes named pipex:
 //    a) 32372 ./pipex
 //    b) 32577 ./pipex
 //    c) 32655 ./pipex
 //Which process? (letter or PID)
+//NOTE - Tiene que ver con el manejo de los fd en el fork.
+//No había derrado fd infile y outfile en cada proceso.

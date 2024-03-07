@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 10:12:56 by Cristina          #+#    #+#             */
-/*   Updated: 2024/02/12 09:43:54 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:26:54 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 	char	*add_slash;
 	char	*cmd_path;
 
-	//ft_printf("Dentro de get_cmd_path_route\n");
+	ft_printf("Dentro de get_cmd_path_route\n");
 	i = 0;
 	if (check_command_type(data, cmd) == 1)
 		return (cmd);
@@ -78,5 +78,6 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 			i++;
 		}
 	}
-	return (cmd_path);
+	//FIXME - Había un return(cmdpath) pero si no encuentra el path no es capaz de irse del programa
+	return (NULL);
 }

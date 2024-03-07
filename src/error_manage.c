@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:43:34 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/15 16:06:21 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:30:42 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ static void	free_array(char **array)
 	free(array);
 }
 
-static void	close_fds(t_pipex *data)
+void	close_fds(t_pipex *data)
 {
+	ft_printf("Dentro de close_fds\n");
 	if (data->fd_infile > 0)
 		close(data->fd_infile);
 	if (data->fd_outfile > 0)
@@ -39,6 +40,7 @@ static void	close_fds(t_pipex *data)
 
 void	exit_program(t_error code, t_pipex *data)
 {
+	ft_printf("--------------Dentro de close_fds\n");
 	if (code == ENV)
 		perror("Environment error");
 	else if (code == FILE_ERR)
