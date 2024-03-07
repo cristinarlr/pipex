@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:48:47 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/07 12:32:48 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:55:12 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,16 @@ static void	second_command(t_pipex *data)
 //pero no es el main, ¿tendría retornar = en el main?
 int	pipex(t_pipex *data)
 {
+	//int	status[2];
 	int	status;
 
 	printf("-------------------inside pipex\n");
-	status = 30032020;
+
 	first_command(data);
 	second_command(data);
-	close_fds(data);
 	//REVIEW - estos waitpid estan correctos, el de pid[1] hay que hacer algo?
-	waitpid(data->pid[1], NULL, 0);
-	waitpid(data->pid[0], &status, 0);
+	waitpid(data->pid[0], NULL, 0);
+	waitpid(data->pid[1], &status, 0);
+	close_fds(data);
 	return (WEXITSTATUS(status));
 }
