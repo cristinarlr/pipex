@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printing_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:45:55 by crramire          #+#    #+#             */
-/*   Updated: 2024/02/15 12:22:51 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:30:14 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	ft_print_array(char **arr)
 		ft_printf("arr[%i] = %s\n", i, arr[i]);
 		i++;
 	}
+	ft_printf("arr[%i] = %s\n", i, arr[i]);
 	ft_printf("Dentro de print_array\n");
 }

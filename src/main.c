@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/07 12:20:10 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:07:58 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	init_data_structure(t_pipex *data)
 {
 	data->fd_infile = 0;
 	data->fd_outfile = 0;
-	if (pipe(data->fd_pipe) == -1)
-		exit_program(FILE_ERR, data);
+	data->fd_pipe[0] = -1;
+	data->fd_pipe[1] = -1;
 	data->envp_path_splitted = NULL;
 	data->cmd_args_splitted = NULL;
 	data->pid[0] = -1;
@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	data;
 
-	atexit(check_leaks);
+	//atexit(check_leaks);
 	ft_printf("%s PID: %i\n", argv[0], getpid());
 	check_program_args(argc, argv, envp);
 	data.argc = argc;
@@ -65,11 +65,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (pipex(&data));
 }
-
-//NOTE - [FIXED] You have access to multiple processes named pipex:
-//    a) 32372 ./pipex
-//    b) 32577 ./pipex
-//    c) 32655 ./pipex
-//Which process? (letter or PID)
-//NOTE - Tiene que ver con el manejo de los fd en el fork.
-//No había derrado fd infile y outfile en cada proceso.
