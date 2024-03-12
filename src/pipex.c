@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:48:47 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/11 15:50:21 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/03/12 07:08:26 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	executing_check(int *status, int command)
 		if (status_code == 0)
 			printf("..............SUCCES Command %i\n", command);
 		else
-			printf("..............FAILURE Command %i with statusCode %d\n", command, status_code);
+			printf(".............. 🔥 FAILURE Command %i with statusCode %d\n", command, status_code);
 	}
 }
 
@@ -73,6 +73,8 @@ int	pipex(t_pipex *data)
 	ft_printf("data->fd_pipe[1] = %i\n", data->fd_pipe[1]);
 	first_command(data);
 	second_command(data);
+	close (data->fd_pipe[0]);
+	close (data->fd_pipe[1]);
 	//REVIEW - estos waitpid estan correctos, el de pid[1] hay que hacer algo?
 	waitpid(data->pid[0], &status[0], 0);
 	executing_check(&status[0], 1);
@@ -81,6 +83,12 @@ int	pipex(t_pipex *data)
 	ft_printf("CASI CASI Dos COMANDOS ejecutados\n");
 	executing_check(&status[1], 2);
 	ft_printf("Dos COMANDOS ejecutados\n");
-	close_fds(data);
+	//close_fds(data);
 	exit(WEXITSTATUS(status[1]));
 }
+
+
+//NOTE - Cambios hechos en la prueba:
+//close fd_pipe en parent antes de los waitpid (en pipex.c 76, 77)
+//redirigir el split de los argumentos a un nuevo puntero (en execute.c)
+//EL PROBLEMA VIENE DE QUE AL CONCATENAR PATH SE ESTÁN SUMANDO LAS COMILLAS DE ARGV "LS"

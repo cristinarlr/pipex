@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/11 14:07:58 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/03/12 06:57:38 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char **argv, char **envp)
 	data.envp = envp;
 	data.cmds[0] = *(argv + 2);
 	data.cmds[1] = *(argv + 3);
+	printf("´´´´´´´´´´´´´´´´´´´´´´´´´\nargv[2] = %s\n argv[3] = %s\n", argv[2], argv[3]);
 	if (init_data_structure(&data) == ERROR)
 	{
 		perror("Problem initializing structure");

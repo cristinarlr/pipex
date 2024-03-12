@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 10:12:56 by Cristina          #+#    #+#             */
-/*   Updated: 2024/03/08 12:26:16 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/03/12 06:38:32 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 		return (cmd);
 	else
 	{
+		printf("get_cmd_path_route: cmd = %s\n", cmd);
 		data->envp_path_splitted = ft_split(data->envp_path, ':');
 		while (data->envp_path_splitted[i])
 		{
@@ -68,6 +69,7 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 			if (!add_slash)
 				return (NULL);
 			cmd_path = ft_strjoin(add_slash, cmd);
+			printf("get_cmd_path_route: path = %s\n", cmd_path);
 			free(add_slash);
 			if (access(cmd_path, F_OK) == 0)
 				return (cmd_path);

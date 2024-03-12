@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:02:40 by Cristina          #+#    #+#             */
-/*   Updated: 2024/03/11 16:54:22 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/03/12 07:06:42 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ void	print_array(char **arr)
 /* Verify infile and outfile fd */
 void	check_and_open_fd(t_pipex *data, int file_stream)
 {
-	printf("<<<<<<<<<<<<<<<<<<<<<<<inside check_and_open_fd\n");
 	if (file_stream == INFILE)
 	{
-		printf("------- inside check_and_open_fd ----- INFILE\n");
 		if ((access(data->argv[1], F_OK) == -1)
 			|| (access(data->argv[1], R_OK) == -1))
 			exit_program(FILE_ERR, NULL);
@@ -41,7 +39,6 @@ void	check_and_open_fd(t_pipex *data, int file_stream)
 	}
 	else if (file_stream == OUTFILE)
 	{
-		printf("------- inside check_and_open_fd ----- OUTFILE\n");
 		if ((access(data->argv[4], F_OK) == -1)
 			|| (access(data->argv[4], W_OK) == -1))
 			exit_program(FILE_ERR, NULL);
@@ -50,7 +47,6 @@ void	check_and_open_fd(t_pipex *data, int file_stream)
 		if (data->fd_outfile < 0)
 			exit_program(FILE_ERR, data);
 	}
-	printf(">>>>>>>>>>>>>>>>>>>>>>>>>outside check_and_open_fd\n");
 }
 
 //TODO - Proteger !path, los dos dup y el execve. Pero poco a poco porque eso es lo que me ha estado dando errores.
@@ -58,10 +54,13 @@ void	check_and_open_fd(t_pipex *data, int file_stream)
 void	exec_cmd_1(t_pipex *data)
 {
 	char	*path;
-
-	printf("\n---------inside exec_cmd_1\n");
+	
 	close(data->fd_pipe[READ]);
+	printf("\n---------inside exec_cmd_1\n");
+	printf(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, data->argv[2] = %s\n", data->argv[2]);
 	data->cmd_args_splitted = ft_split(data->argv[2], ' ');
+	printf(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, \n");
+	print_array(data->cmd_args_splitted);
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
 	printf("path (cmd 1)= %s\n", path);
 	printf("Array Comando 1:\n");
@@ -71,20 +70,23 @@ void	exec_cmd_1(t_pipex *data)
 	close(data->fd_infile);
 	dup2(data->fd_pipe[WRITE], STDOUT_FILENO);
 	close(data->fd_pipe[WRITE]);
-	if (execve(path, data->cmd_args_splitted, data->envp) == -1)
+	if (execve("/bin/ls", data->cmd_args_splitted, data->envp) == -1)
 		exit(EXIT_FAILURE);
+	// if (execve(path, data->cmd_args_splitted, data->envp) == -1)
+	// 	exit(EXIT_FAILURE);
 }
 
 //fd_pipe OPEN //to OPEN fd_outfile
 void	exec_cmd_2(t_pipex *data)
 {
-	char	*path;
+	//char	*path;
 
+	close(data->fd_pipe[WRITE]);
 	printf("\n--------inside exec_cmd_2\n");
 	close(data->fd_pipe[WRITE]);
 	data->cmd_args_splitted = ft_split(data->argv[3], ' ');
-	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
-	ft_printf("path (cmd 2)= %s\n", path);
+	//path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
+	//ft_printf("path (cmd 2)= %s\n", path);
 	printf("Array Comando 2:\n");
 	print_array(data->cmd_args_splitted);
 	check_and_open_fd(data, OUTFILE);
@@ -95,8 +97,10 @@ void	exec_cmd_2(t_pipex *data)
 	close(data->fd_pipe[READ]);
 	//a partir de aquí todo se imprime en outfile
 	//FIXME - When I want to execute < ./pipex infile "ls" "wc" outfile > the program gets stuck. It seems like an argument in execve is not working well. But is weird because this command here works well < ./pipex infile "ls" "ls" outfile >, it seems that it only happens with "wc". Check the 3 args in execve
-	if (execve(path, data->cmd_args_splitted, data->envp) < 0)
+	if (execve("/usr/bin/sort", data->cmd_args_splitted, data->envp) < 0)
 		exit(127);
+	// if (execve(path, data->cmd_args_splitted, data->envp) < 0)
+	// 	exit(127);
 }
 
 /* ---------------------------------------------- */
