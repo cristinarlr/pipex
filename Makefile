@@ -23,7 +23,7 @@ SRC_CFILES =	main.c \
 				execute.c \
 				error_manage.c \
 				pipex.c \
-				printing_utils.c \
+				utils.c \
 
 # Source/linker files ---------------------------------------- #
 LIBFT_DIR =$(SRC_DIR)/libft

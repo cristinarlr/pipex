@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 10:12:56 by Cristina          #+#    #+#             */
-/*   Updated: 2024/03/12 06:38:32 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:36:15 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,14 @@ char	*find_path_in_envp(t_pipex *data)
 //check if cmd passed is a route
 static int	check_command_type(t_pipex *data, char *cmd)
 {
-	//REVIEW - Poner función exit program y forzar error
 	if (ft_strlen(data->argv[2]) == 0 | ft_strlen(data->argv[3]) == 0)
-		exit(ft_printf("crear función exit_program - invalid arguments"));
+		exit_program(NO_CMD, data);
 	if (cmd[0] == '.' | cmd[0] == '/')
 	{
 		if (access(data->argv[2], F_OK & R_OK & X_OK) == 0)
 			return (1);
 		else
-		//REVIEW - Poner función exit program y forzar error
-			exit(ft_printf("crear función exit_program - invalid PATH input"));
+			exit_program(CMD, data);
 	}
 	return (0);
 }
@@ -61,7 +59,7 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 		return (cmd);
 	else
 	{
-		printf("get_cmd_path_route: cmd = %s\n", cmd);
+		//ft_printf("get_cmd_path_route: cmd = %s\n", cmd);
 		data->envp_path_splitted = ft_split(data->envp_path, ':');
 		while (data->envp_path_splitted[i])
 		{
@@ -69,7 +67,6 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 			if (!add_slash)
 				return (NULL);
 			cmd_path = ft_strjoin(add_slash, cmd);
-			printf("get_cmd_path_route: path = %s\n", cmd_path);
 			free(add_slash);
 			if (access(cmd_path, F_OK) == 0)
 				return (cmd_path);

@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:43:34 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/07 13:59:42 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:20:18 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	close_fds(t_pipex *data)
 
 void	exit_program(t_error code, t_pipex *data)
 {
-	ft_printf("--------------Dentro de EXIT PROGRAM\n");
+	//ft_printf("--------------Dentro de EXIT PROGRAM\n");
 	if (code == ENV)
 		perror("Environment error");
 	else if (code == FILE_ERR)
@@ -55,7 +55,7 @@ void	exit_program(t_error code, t_pipex *data)
 	else if (code == EXECVE)
 		perror("Problem in process executing");
 	if (data == NULL)
-		exit(-1);
+		exit(1);
 	close_fds(data);
 	if (data->envp_path_splitted)
 		free_array(data->envp_path_splitted);
@@ -63,5 +63,6 @@ void	exit_program(t_error code, t_pipex *data)
 		free_array(data->cmd_args_splitted);
 	if (CMD)
 		exit(127);
+	//REVIEW - He cambiado el exit por return
 	exit(1);
 }

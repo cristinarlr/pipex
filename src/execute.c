@@ -3,27 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:02:40 by Cristina          #+#    #+#             */
-/*   Updated: 2024/03/12 07:06:42 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:11:17 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-void	print_array(char **arr)
-{
-	int	i;
-	
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		printf("arr[%i] = %s\n", i, arr[i]);
-		i++;
-	}
-	printf("arr[%i] = %s\n", i, arr[i]);
-}
 
 /* Verify infile and outfile fd */
 void	check_and_open_fd(t_pipex *data, int file_stream)
@@ -54,53 +42,47 @@ void	check_and_open_fd(t_pipex *data, int file_stream)
 void	exec_cmd_1(t_pipex *data)
 {
 	char	*path;
-	
+
 	close(data->fd_pipe[READ]);
-	printf("\n---------inside exec_cmd_1\n");
-	printf(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, data->argv[2] = %s\n", data->argv[2]);
+	//("---------inside exec_cmd_1\n");
 	data->cmd_args_splitted = ft_split(data->argv[2], ' ');
-	printf(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, \n");
-	print_array(data->cmd_args_splitted);
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
-	printf("path (cmd 1)= %s\n", path);
-	printf("Array Comando 1:\n");
-	print_array(data->cmd_args_splitted);
+	if (!path)
+		exit_program(NO_CMD, data);
+	//ft_printf("path (cmd 1)= %s\n", path);
 	check_and_open_fd(data, INFILE);
-	dup2(data->fd_infile, STDIN_FILENO);
+	if (dup2(data->fd_infile, STDIN_FILENO) == -1)
+		exit_program(FILE_ERR, data);
 	close(data->fd_infile);
-	dup2(data->fd_pipe[WRITE], STDOUT_FILENO);
+	if (dup2(data->fd_pipe[WRITE], STDOUT_FILENO) == -1)
+		exit_program(FILE_ERR, data);
 	close(data->fd_pipe[WRITE]);
-	if (execve("/bin/ls", data->cmd_args_splitted, data->envp) == -1)
-		exit(EXIT_FAILURE);
-	// if (execve(path, data->cmd_args_splitted, data->envp) == -1)
-	// 	exit(EXIT_FAILURE);
+	if (execve(path, data->cmd_args_splitted, data->envp) == -1)
+		exit_program(EXECVE, data);
 }
 
 //fd_pipe OPEN //to OPEN fd_outfile
 void	exec_cmd_2(t_pipex *data)
 {
-	//char	*path;
+	char	*path;
 
 	close(data->fd_pipe[WRITE]);
-	printf("\n--------inside exec_cmd_2\n");
-	close(data->fd_pipe[WRITE]);
+	//ft_printf("--------inside exec_cmd_2\n");
 	data->cmd_args_splitted = ft_split(data->argv[3], ' ');
-	//path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
+	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
+	if (!path)
+		exit_program(NO_CMD, data);
 	//ft_printf("path (cmd 2)= %s\n", path);
-	printf("Array Comando 2:\n");
-	print_array(data->cmd_args_splitted);
 	check_and_open_fd(data, OUTFILE);
-	//el outfile se convierte en stdout
-	dup2(data->fd_outfile, STDOUT_FILENO);
+	if (dup2(data->fd_outfile, STDOUT_FILENO) == -1)
+		exit_program(FILE_ERR, data);
 	close(data->fd_outfile);
-	dup2(data->fd_pipe[READ], STDIN_FILENO);
+	if (dup2(data->fd_pipe[READ], STDIN_FILENO) == -1)
+		exit_program(FILE_ERR, data);
 	close(data->fd_pipe[READ]);
-	//a partir de aquí todo se imprime en outfile
-	//FIXME - When I want to execute < ./pipex infile "ls" "wc" outfile > the program gets stuck. It seems like an argument in execve is not working well. But is weird because this command here works well < ./pipex infile "ls" "ls" outfile >, it seems that it only happens with "wc". Check the 3 args in execve
-	if (execve("/usr/bin/sort", data->cmd_args_splitted, data->envp) < 0)
-		exit(127);
-	// if (execve(path, data->cmd_args_splitted, data->envp) < 0)
-	// 	exit(127);
+	if (execve(path, data->cmd_args_splitted, data->envp) == -1)
+		exit_program(EXECVE, data);
+		//exit(127);
 }
 
 /* ---------------------------------------------- */
