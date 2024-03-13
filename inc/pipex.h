@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/07 12:30:52 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:51:34 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_pipex
 /* ----- STRUCT ----- */
 
 /* ----- FUNCTIONS ----- */
-
 char	*find_path_in_envp(t_pipex *data);
 char	*get_cmd_path_route(t_pipex *data, char *cmd);
 int		pipex(t_pipex *data);
@@ -94,5 +93,9 @@ void	exec_cmd_1(t_pipex *data);
 void	exec_cmd_2(t_pipex *data);
 void	exit_program(t_error code, t_pipex *data);
 void	close_fds(t_pipex *data);
+
+/* ----- FUNCTIONS (UTILS) ----- */
+void	executing_check(int *status, int command);
+void	ft_print_pids(pid_t pid);
 
 #endif
