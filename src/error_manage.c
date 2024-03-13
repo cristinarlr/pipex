@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:43:34 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/12 13:20:18 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/13 09:23:55 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	exit_program(t_error code, t_pipex *data)
 	if (CMD)
 		exit(127);
 	//REVIEW - He cambiado el exit por return
-	exit(1);
+	exit(0);
 }

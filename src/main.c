@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/12 12:51:06 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/13 10:17:40 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ static void	check_program_args(int argc, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	data;
-	int	i = 0;
 
 	//atexit(check_leaks);
 	//ft_printf("%s PID: %i\n", argv[0], getpid());
 	check_program_args(argc, envp);
 	data.argc = argc;
 	data.argv = argv;
-	i = 0;
 	data.envp = envp;
 	if (init_data_structure(&data) == ERROR)
 	{
@@ -64,6 +62,5 @@ int	main(int argc, char **argv, char **envp)
 		perror("No PATH finded");
 		exit(errno);
 	}
-	//REVIEW - He cambiado return por exit
 	return (pipex(&data));
 }
