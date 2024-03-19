@@ -55,11 +55,11 @@ SRCS_B = $(SRC_FILES_B)
 SRC_DIR_B = src_bonus
 SRC_FILES_B = $(addprefix $(SRC_DIR_B)/, $(SRC_CFILES_B))
 SRC_CFILES_B =	main_bonus.c \
-				# path_bonus.c \
-				# execute_bonus.c \
-				# error_manage_bonus.c \
-				# pipex_bonus.c \
-				# utils_bonus.c \
+				path_bonus.c \
+				execute_bonus.c \
+				error_manage_bonus.c \
+				pipex_bonus.c \
+				utils_bonus.c \
 
 # Bonus Object files ----------------------------------------------- #
 OBJS_B = $(patsubst $(SRC_DIR_B)/%.c,$(OBJ_DIR_B)/%.o,$(SRCS_B))
