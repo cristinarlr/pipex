@@ -6,13 +6,13 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:02:40 by Cristina          #+#    #+#             */
-/*   Updated: 2024/03/19 13:01:01 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:53:38 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "../inc_bonus/pipex_bonus.h"
 
-/* Verify infile and outfile fd */
+/* CHILD - Verify infile and outfile fd */
 void	check_and_open_fd(t_pipex *data, int file_stream)
 {
 	if (file_stream == INFILE)
@@ -36,13 +36,12 @@ void	check_and_open_fd(t_pipex *data, int file_stream)
 	}
 }
 
-//fd_pipe OPEN //to OPEN fd_infile
+// INSIDE FIRST CHILD //fd_pipe OPEN //to OPEN fd_infile
 void	exec_first_cmd(t_pipex *data)
 {
 	char	*path;
 
 	close(data->fd_pipe[READ]);
-	//("---------inside exec_cmd_1\n");
 	data->cmd_args_splitted = ft_split(data->argv[2], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
 	if (!path)
@@ -59,13 +58,30 @@ void	exec_first_cmd(t_pipex *data)
 		exit_program(EXECVE, data);
 }
 
-/* void	exec_middle_cmd(t_pipex *data)
+// INSIDE MIDDLE CHILD //fd_pipe OPEN
+void	exec_middle_cmd(t_pipex *data)
+{
+	char	*path;
+	int		i;
 
+	ft_printf("--------inside exec_middle_cmd\n");
+	i = data->argc - data->middle_cmds - 2;
+	close(data->fd_pipe[READ]);
+	data->cmd_args_splitted = ft_split(data->argv[i], ' ');
+	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
+	if (!path)
+		exit_program(NO_CMD, data);
+	ft_printf("--------Path OK\n");
+	if (dup2(data->fd_current_pipe, STDIN_FILENO) == -1)
+		exit_program(FILE_ERR, data);
+	if (dup2(data->fd_pipe[WRITE], STDOUT_FILENO) == -1)
+		exit_program(FILE_ERR, data);
+	close(data->fd_pipe[WRITE]);
+	if (execve(path, data->cmd_args_splitted, data->envp) == -1)
+		exit_program(EXECVE, data);
+}
 
-*/
-
-
-//fd_pipe OPEN //to OPEN fd_outfile
+// INSIDE LAST CHILD //fd_pipe OPEN //to OPEN fd_outfile
 void	exec_last_cmd(t_pipex *data)
 {
 	char	*path;

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_manage.c                                     :+:      :+:    :+:   */
+/*   error_manage_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:43:34 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/13 09:23:55 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/20 09:54:37 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "../inc_bonus/pipex_bonus.h"
 
 static void	free_array(char **array)
 {

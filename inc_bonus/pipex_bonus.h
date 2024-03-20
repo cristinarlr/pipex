@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 12:56:15 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/19 13:01:28 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:46:56 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct s_pipex
 	int		fd_infile;
 	int		fd_outfile;
 	int		fd_pipe[2];
+	int		fd_current_pipe;
+	int		middle_cmds;
 	char	*envp_path;
 	char	**envp_path_splitted;
 	char	**cmd_args_splitted;
@@ -90,6 +92,7 @@ int		pipex(t_pipex *data);
 void	ft_print_pids(pid_t pid);
 void	ft_print_array(char **arr);
 void	exec_first_cmd(t_pipex *data);
+void	exec_middle_cmd(t_pipex *data);
 void	exec_last_cmd(t_pipex *data);
 void	exit_program(t_error code, t_pipex *data);
 void	close_fds(t_pipex *data);

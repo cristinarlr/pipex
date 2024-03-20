@@ -117,12 +117,14 @@ $(OBJ_DIR_B):
 
 clean:
 	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR_B)
 	@echo "$(MAGENTA)[+] Object .o files ERASED $(END)"
 
 fclean: clean
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 	@$(MAKE) fclean -C $(PRINTF_DIR)
 	@rm -f $(NAME)
+	@rm -f $(NAME_B)
 	@echo "$(MAGENTA)[+] $(NAME) ERASED $(END)"
 
 re: fclean all

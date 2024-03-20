@@ -6,13 +6,13 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:48:47 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/19 13:03:52 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:57:58 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "../inc_bonus/pipex_bonus.h"
 
-//child FIRST process pid0 //fd_pipe OPEN
+//PARENT - managing FIRST CHILD //fd_pipe OPEN
 static void	first_command(t_pipex *data)
 {
 	if (pipe(data->fd_pipe) < 0)
@@ -22,22 +22,26 @@ static void	first_command(t_pipex *data)
 		exit_program(FORK, data);
 	//printf("CHILD 1 - pid[0]: %i\n", data->pid[0]);
 	if (data->pid[0] == CHILD)
-		exec_cmd_1(data);
+		exec_first_cmd(data);
+	data->fd_current_pipe = data->fd_pipe[READ];
 }
 
-/* //child MIDDLE process pid0 //fd_pipe OPEN
+//PARENT - managing MIDDLE CHILDS//fd_pipe OPEN
 static void	middle_command(t_pipex *data)
 {
-	data->pid[0] = fork();
+	//FIXME - Me está dando un error de lectura de file, ver todas las salidas de error
+	ft_printf("MIDDLE_COMMAND\n");
 	if (data->pid[0] < 0)
 		exit_program(FORK, data);
+	data->pid[0] = fork();
 	if (data->pid[0] == CHILD)
 		exec_middle_cmd(data);
-	//Guardar el fd_read en upstream
-} */
+	//Guardar el fd_read en upstream para el siguiente comando
+	data->fd_current_pipe = data->fd_pipe[READ];
+}
 
-//child LAST process pid1 //fd_pipe OPEN
-static void	last_command(t_pipex *data)
+//PARENT - managing LAST CHILD //fd_pipe OPEN
+static void	last_command(t_pipex	*data)
 {
 	//ft_printf("-------------------inside second_command\n");
 	data->pid[1] = fork();
@@ -49,23 +53,23 @@ static void	last_command(t_pipex *data)
 }
 
 //Returns last comand status to main
-int	pipex(t_pipex *data)
+int	pipex(t_pipex	*data)
 {
 	int	status[2];
 
 	//ft_printf("-------------------inside pipex\n");
 	status[0] = 3003;
 	status[1] = 0403;
+	data->middle_cmds = data->argc - 5;
 	/* El primer pipe lo hago dentro de first_cmd en padre */
 	first_command(data);
-	/* while (middle_cmds > 0)
+	while (data->middle_cmds > 0)
 	{
 		if (pipe(data->fd_pipe) < 0)
 			exit(EXIT_FAILURE);
 		middle_command(data);
-		middle_cmds--;
+		data->middle_cmds--;
 	}
-	 */
 	last_command(data);
 	close (data->fd_pipe[0]);
 	close (data->fd_pipe[1]);

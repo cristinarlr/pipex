@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/13 10:17:40 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:39:21 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	check_program_args(int argc, char **envp)
 	if (argc != 5)
 	{
 		perror("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n");
-		exit(5);
+		exit(0);
 	}
 }
 
