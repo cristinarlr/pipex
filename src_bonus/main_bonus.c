@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/20 10:38:50 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:18:31 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	data;
 
 	//atexit(check_leaks);
-	//ft_printf("%s PID: %i\n", argv[0], getpid());
+	ft_printf("%s PID: %i\n", argv[0], getpid());
 	check_program_args(argc, envp);
 	data.argc = argc;
 	data.argv = argv;

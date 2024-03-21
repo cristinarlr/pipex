@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:48:47 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/20 11:57:58 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:23:25 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ static void	last_command(t_pipex	*data)
 		exit_program(FORK, data);
 	//ft_printf("CHILD 2 - pid[1]: %i\n", data->pid[1]);
 	if (data->pid[1] == CHILD)
+	{
+		ft_printf("data->fd_pipe")
 		exec_last_cmd(data);
+	}
 }
 
 //Returns last comand status to main

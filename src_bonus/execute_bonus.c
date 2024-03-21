@@ -6,7 +6,7 @@
 /*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:02:40 by Cristina          #+#    #+#             */
-/*   Updated: 2024/03/20 11:53:38 by crramire         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:21:28 by crramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,14 @@ void	exec_middle_cmd(t_pipex *data)
 	ft_printf("--------Path OK\n");
 	if (dup2(data->fd_current_pipe, STDIN_FILENO) == -1)
 		exit_program(FILE_ERR, data);
+	ft_printf("--------IF 1 OK\n");
 	if (dup2(data->fd_pipe[WRITE], STDOUT_FILENO) == -1)
 		exit_program(FILE_ERR, data);
+	ft_printf("--------IF 2 OK\n");
 	close(data->fd_pipe[WRITE]);
 	if (execve(path, data->cmd_args_splitted, data->envp) == -1)
 		exit_program(EXECVE, data);
+	ft_printf("--------IF 3 OK\n");
 }
 
 // INSIDE LAST CHILD //fd_pipe OPEN //to OPEN fd_outfile
