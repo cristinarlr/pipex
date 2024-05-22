@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/03/13 10:17:40 by crramire         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:40:18 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	init_data_structure(t_pipex *data)
 {
+	// REVIEW Qué pasa si pongo los fd_infile y ourfile a -1? 
+	// creo recordar que los puse a 0 porque si no daban problemas
 	data->fd_infile = 0;
 	data->fd_outfile = 0;
 	data->fd_pipe[0] = -1;
