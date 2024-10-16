@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:02:40 by Cristina          #+#    #+#             */
-/*   Updated: 2024/03/13 10:33:33 by crramire         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:51:36 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ void	exec_cmd_1(t_pipex *data)
 	char	*path;
 
 	close(data->fd_pipe[READ]);
+	check_and_open_fd(data, INFILE);
 	data->cmd_args_splitted = ft_split(data->argv[2], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
 	if (!path)
 		exit_program(NO_CMD, data);
-	check_and_open_fd(data, INFILE);
+	//check_and_open_fd(data, INFILE);
 	if (dup2(data->fd_infile, STDIN_FILENO) == -1)
 		exit_program(FILE_ERR, data);
 	close(data->fd_infile);
@@ -61,11 +62,12 @@ void	exec_cmd_2(t_pipex *data)
 	char	*path;
 
 	close(data->fd_pipe[WRITE]);
+	check_and_open_fd(data, OUTFILE);
 	data->cmd_args_splitted = ft_split(data->argv[3], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
 	if (!path)
 		exit_program(NO_CMD, data);
-	check_and_open_fd(data, OUTFILE);
+	//check_and_open_fd(data, OUTFILE);
 	if (dup2(data->fd_outfile, STDOUT_FILENO) == -1)
 		exit_program(FILE_ERR, data);
 	close(data->fd_outfile);
