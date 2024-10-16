@@ -56,36 +56,21 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 	i = 0;
 	if (check_command_type(data, cmd) == 1)
 		return (cmd);
-	else
+	data->envp_path_splitted = ft_split(data->envp_path, ':');
+	if (!data->envp_path_splitted)
+		exit_program(MALLOC, data);
+	while (data->envp_path_splitted[i])
 	{
-		ft_printf("get_cmd_path_route: cmd = %s\n", cmd);
-		data->envp_path_splitted = ft_split(data->envp_path, ':');
-		if (!data->envp_path_splitted)
-			return (NULL);
-		while (data->envp_path_splitted[i])
-		{
-			add_slash = ft_strjoin(data->envp_path_splitted[i], "/");
-			if (!add_slash)
-			{
-				free_array(data->envp_path_splitted);
-				return (NULL);
-			}
-			cmd_path = ft_strjoin(add_slash, cmd);
-			free(add_slash);
-			if (!cmd_path)
-			{
-				free_array(data->envp_path_splitted);
-				return (NULL);
-			}
-			if (access(cmd_path, F_OK) == 0)
-			{
-				free_array(data->envp_path_splitted);
-				return (cmd_path);
-			}
-			free(cmd_path);
-			i++;
-		}
-		free_array(data->envp_path_splitted);
+		add_slash = ft_strjoin(data->envp_path_splitted[i], "/");
+		if (!add_slash)
+			exit_program(MALLOC, data);
+		cmd_path = ft_strjoin(add_slash, cmd);
+		if (!cmd_path)
+			exit_program(MALLOC, data);
+		if (access(cmd_path, F_OK) == 0)
+			return (cmd_path);
+		i++;
 	}
+	free_array(data->envp_path_splitted);
 	return (NULL);
 }
