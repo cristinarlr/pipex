@@ -39,7 +39,6 @@ void	close_fds(t_pipex *data)
 
 void	exit_program(t_error code, t_pipex *data)
 {
-	//ft_printf("--------------Dentro de EXIT PROGRAM\n");
 	if (code == ENV)
 		perror("Environment error");
 	else if (code == FILE_ERR)
@@ -63,6 +62,5 @@ void	exit_program(t_error code, t_pipex *data)
 		free_array(data->cmd_args_splitted);
 	if (CMD)
 		exit(127);
-	//REVIEW - He cambiado el exit por return
 	exit(0);
 }

@@ -34,21 +34,3 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i++] - '0');
 	return (result * flag);
 }
-
-/*
-int	main ()
-{
-	char	*str;
-	int	value_atoi;
-	int	value_ft_atoi;
-
-	str = "  -34 9";
-	str = "123\b45";
-	value_atoi = atoi(str) - 2;
-	printf ("atoi num = %d\n", atoi(str));
-	printf ("atoi value of rest (%d - 2) = %d\n\n", atoi(str), value_atoi);	
-	value_ft_atoi = ft_atoi(str) - 2;
-	printf ("ft_atoi num = %d\n", ft_atoi(str));
-	printf ("ft_atoi value of rest (%d - 2) = %d\n", ft_atoi(str), value_ft_atoi);
-	return (0);
-} */

@@ -17,7 +17,6 @@ char	*find_path_in_envp(t_pipex *data)
 {
 	int	i;
 
-	//ft_printf("Dentro de find_path_in_envp\n");
 	i = 0;
 	while (data->envp[i])
 	{
@@ -59,7 +58,7 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 		return (cmd);
 	else
 	{
-		//ft_printf("get_cmd_path_route: cmd = %s\n", cmd);
+		ft_printf("get_cmd_path_route: cmd = %s\n", cmd);
 		data->envp_path_splitted = ft_split(data->envp_path, ':');
 		while (data->envp_path_splitted[i])
 		{

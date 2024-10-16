@@ -14,8 +14,6 @@
 
 int	init_data_structure(t_pipex *data)
 {
-	// REVIEW Qué pasa si pongo los fd_infile y ourfile a -1? 
-	// creo recordar que los puse a 0 porque si no daban problemas
 	data->fd_infile = 0;
 	data->fd_outfile = 0;
 	data->fd_pipe[0] = -1;
@@ -27,10 +25,10 @@ int	init_data_structure(t_pipex *data)
 	return (NO_ERROR);
 }
 
-/* void	check_leaks(void)
+void	check_leaks(void)
 {
 	system("leaks -q pipex");
-} */
+}
 
 static void	check_program_args(int argc, char **envp)
 {
@@ -48,8 +46,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	data;
 
-	//atexit(check_leaks);
-	//ft_printf("%s PID: %i\n", argv[0], getpid());
+	atexit(check_leaks);
+	ft_printf("%s PID: %i\n", argv[0], getpid());
 	check_program_args(argc, envp);
 	data.argc = argc;
 	data.argv = argv;

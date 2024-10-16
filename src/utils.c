@@ -44,8 +44,8 @@ void	executing_check(int *status, int command)
 		ft_printf("..............inside executing_check Command %i\n", command);
 		status_code = WEXITSTATUS(status[0]);
 		if (status_code == 0)
-			ft_printf(".............. ✅ SUCCES Command %i\n", command);
+			ft_printf("SUCCES Cmd %i\n", command);
 		else
-			ft_printf(".............. 🔥 FAILURE Command %i with statusCode %d\n", command, status_code);
+			ft_printf("FAILURE Cmd %i w/statusCode %d\n", command, status_code);
 	}
 }

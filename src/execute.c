@@ -36,18 +36,15 @@ void	check_and_open_fd(t_pipex *data, int file_stream)
 	}
 }
 
-//fd_pipe OPEN //to OPEN fd_infile
 void	exec_cmd_1(t_pipex *data)
 {
 	char	*path;
 
 	close(data->fd_pipe[READ]);
-	//("---------inside exec_cmd_1\n");
 	data->cmd_args_splitted = ft_split(data->argv[2], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
 	if (!path)
 		exit_program(NO_CMD, data);
-	//ft_printf("path (cmd 1)= %s\n", path);
 	check_and_open_fd(data, INFILE);
 	if (dup2(data->fd_infile, STDIN_FILENO) == -1)
 		exit_program(FILE_ERR, data);
@@ -59,18 +56,15 @@ void	exec_cmd_1(t_pipex *data)
 		exit_program(EXECVE, data);
 }
 
-//fd_pipe OPEN //to OPEN fd_outfile
 void	exec_cmd_2(t_pipex *data)
 {
 	char	*path;
 
 	close(data->fd_pipe[WRITE]);
-	//ft_printf("--------inside exec_cmd_2\n");
 	data->cmd_args_splitted = ft_split(data->argv[3], ' ');
 	path = get_cmd_path_route(data, data->cmd_args_splitted[0]);
 	if (!path)
 		exit_program(NO_CMD, data);
-	//ft_printf("path (cmd 2)= %s\n", path);
 	check_and_open_fd(data, OUTFILE);
 	if (dup2(data->fd_outfile, STDOUT_FILENO) == -1)
 		exit_program(FILE_ERR, data);
