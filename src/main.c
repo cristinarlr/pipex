@@ -6,7 +6,7 @@
 /*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:00:59 by crramire          #+#    #+#             */
-/*   Updated: 2024/05/21 13:40:18 by Cristina         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:45:40 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	init_data_structure(t_pipex *data)
 	return (NO_ERROR);
 }
 
-void	check_leaks(void)
+/* void	check_leaks(void)
 {
 	system("leaks -q pipex");
-}
+} */
 
 static void	check_program_args(int argc, char **envp)
 {
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	data;
 
-	atexit(check_leaks);
+	//atexit(check_leaks);
 	ft_printf("%s PID: %i\n", argv[0], getpid());
 	check_program_args(argc, envp);
 	data.argc = argc;
