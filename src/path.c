@@ -71,6 +71,5 @@ char	*get_cmd_path_route(t_pipex *data, char *cmd)
 			return (cmd_path);
 		i++;
 	}
-	free_array(data->envp_path_splitted);
 	return (NULL);
 }
