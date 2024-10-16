@@ -37,13 +37,15 @@ OBJ_DIR = obj
 # Include files (header) ------------------------------------- #
 INCL_DIR = includes
 
+#SANITIZE=
+SANITIZE=-g -fsanitize=address
+
 # Compiler options ------------------------------------------- #
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror  $(SANITIZE)
 LINKFLAGS = -L./$(LIBFT_DIR) -lft -L./$(PRINTF_DIR) -lftprintf
 
-#SANITIZE=
-SANITIZE=-g -fsanitize=address
+
 
 ########################## RULES ###############################
 
@@ -52,7 +54,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(PRINTF_DIR)
-	@$(CC) $(CFLAGS) $(LINKFLAGS) $(FRAMEWORKS) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LINKFLAGS) $(FRAMEWORKS)
 	@echo "$(GREEN)[+] $(NAME) COMPILED $(END)"
 	@echo "\n"
 	@echo "$(YELLOW) ██████╗ ██╗██████╗ ███████╗██╗  ██╗     ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗██╗     ███████╗██████  $(END)"

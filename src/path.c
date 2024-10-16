@@ -33,9 +33,9 @@ char	*find_path_in_envp(t_pipex *data)
 //check if cmd passed is a route
 static int	check_command_type(t_pipex *data, char *cmd)
 {
-	if (ft_strlen(data->argv[2]) == 0 | ft_strlen(data->argv[3]) == 0)
+	if (ft_strlen(data->argv[2]) == 0 || ft_strlen(data->argv[3]) == 0)
 		exit_program(NO_CMD, data);
-	if (cmd[0] == '.' | cmd[0] == '/')
+	if (cmd[0] == '.' || cmd[0] == '/')
 	{
 		if (access(data->argv[2], F_OK & R_OK & X_OK) == 0)
 			return (1);
