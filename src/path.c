@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crramire <crramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Cristina <Cristina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 10:12:56 by Cristina          #+#    #+#             */
-/*   Updated: 2024/03/12 12:36:15 by crramire         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:23:36 by Cristina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*find_path_in_envp(t_pipex *data)
 }
 
 //check if cmd passed is a route
-static int	check_command_type(t_pipex *data, char *cmd)
+/* static int	check_command_type(t_pipex *data, char *cmd)
 {
 	if (ft_strlen(data->argv[2]) == 0 || ft_strlen(data->argv[3]) == 0)
 		exit_program(NO_CMD, data);
@@ -43,7 +43,28 @@ static int	check_command_type(t_pipex *data, char *cmd)
 			exit_program(CMD, data);
 	}
 	return (0);
+} */
+
+/* Problema:
+Uso incorrecto de operadores bitwise (& en lugar de |).
+Verificación del acceso al argumento incorrecto (data->argv[2] en lugar de cmd).
+Solución:
+Cambia F_OK & R_OK & X_OK por F_OK | R_OK | X_OK.
+Verifica el acceso al comando cmd. */
+static int	check_command_type(t_pipex *data, char *cmd)
+{
+	if (ft_strlen(data->argv[2]) == 0 || ft_strlen(data->argv[3]) == 0)
+		exit_program(NO_CMD, data);
+	if (cmd[0] == '.' || cmd[0] == '/')
+	{
+		if (access(cmd, F_OK | R_OK | X_OK) == 0)
+			return (1);
+		else
+			exit_program(CMD, data);
+	}
+	return (0);
 }
+
 
 //get command in route format "/../../cmd"
 //? cmd_path should be freed after future use?
